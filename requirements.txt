@@ -1,0 +1,11 @@
+fastapi
+uvicorn
+pydantic
+spacy
+nltk
+textblob
+scikit-learn
+python-dateutil
+pandas
+fuzzywuzzy
+python-Levenshtein
