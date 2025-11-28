@@ -17,6 +17,7 @@ from fastapi import FastAPI
 # Routers
 from routes.parse_route import router as parse_router
 from routes.aspect_route import router as aspect_router
+from routes.processing_route import router as processing_router
 
 
 app = FastAPI(
@@ -28,6 +29,7 @@ app = FastAPI(
 # Register Routers
 app.include_router(parse_router)
 app.include_router(aspect_router)
+app.include_router(processing_router)
 
 
 @app.get("/")
