@@ -18,7 +18,10 @@ from fastapi import FastAPI
 from routes.parse_route import router as parse_router
 from routes.aspect_route import router as aspect_router
 from routes.processing_route import router as processing_router
+<<<<<<< HEAD
 from routes.location_route import router as location_router
+=======
+>>>>>>> 84a40f12173ad32343077bb3404bd10ea746e0ec
 
 
 app = FastAPI(
@@ -31,7 +34,10 @@ app = FastAPI(
 app.include_router(parse_router)
 app.include_router(aspect_router)
 app.include_router(processing_router)
+<<<<<<< HEAD
 app.include_router(location_router)
+=======
+>>>>>>> 84a40f12173ad32343077bb3404bd10ea746e0ec
 
 
 @app.get("/")
