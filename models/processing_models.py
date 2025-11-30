@@ -1,9 +1,16 @@
 from pydantic import BaseModel
-from typing import List
+from typing import List, Any
 
 # ------------------------
 # Request Models
 # ------------------------
+class SingleText(BaseModel):
+    text: str
+
+
+class BulkText(BaseModel):
+    texts: List[str]
+
 
 class SingleTextRequest(BaseModel):
     text: str
@@ -36,7 +43,7 @@ class RelationshipsPayload(BaseModel):
     relationships: list of dicts like:
     [{"subject":"x","object":"y","subject_type":"PERSON","object_type":"ORG"}, ...]
     """
-    relationships: List[dict[str, any]]
+    relationships: List[dict[str, Any]]
 
 
 class IOUPayload(BaseModel):
@@ -45,6 +52,6 @@ class IOUPayload(BaseModel):
 
 
 class FormatForLLMPayload(BaseModel):
-    seed_articles: List[dict[str, any]]  # expects dicts with keys: title, date, link, content
-    neighboring: List[dict[str, any]]
+    seed_articles: List[dict[str, Any]]  # expects dicts with keys: title, date, link, content
+    neighboring: List[dict[str, Any]]
     #user_query: optional[str] = ""

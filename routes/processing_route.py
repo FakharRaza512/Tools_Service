@@ -142,9 +142,15 @@ def format_for_llm(payload: FormatForLLMPayload):
     return {"prompt": prompt}
 
 # -----------------------
-# IOU
+# cosine and IOU
 # -----------------------
 @router.post("/iou")
 def iou(payload: IOUPayload):
     score = svc.compute_iou(payload.a, payload.b)
     return {"iou": score}
+
+# -----------------------
+# Graph Building
+# -----------------------
+
+

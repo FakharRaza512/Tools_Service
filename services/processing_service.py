@@ -1,3 +1,6 @@
+import numpy as np
+import faiss
+
 class ProcessingService:
 
     # ----------------------------------------------------
@@ -309,3 +312,48 @@ class ProcessingService:
         inter = len(set_a & set_b)
         union = len(set_a | set_b)
         return inter / union if union else 0.0
+    
+    def compute_cosine_similarity(vec1, vec2):
+     """Compute cosine similarity between two vectors"""
+     dot_product = np.dot(vec1, vec2)
+     norm1 = np.linalg.norm(vec1)
+     norm2 = np.linalg.norm(vec2)
+     if norm1 == 0 or norm2 == 0:
+        return 0.0
+     return dot_product / (norm1 * norm2)
+
+    def compute_iou(set1, set2):
+        """Compute Intersection over Union for two sets"""
+        if not set1 and not set2:
+         return 0.0
+        intersection = len(set1.intersection(set2))
+        union = len(set1.union(set2))
+        if union == 0:
+            return 0.0
+        return intersection / union
+    
+    def create_embeddings(articles):
+        """Create embeddings for articles using a simple approach"""
+    # For now, using random embeddings - replace with actual embedding model
+        embeddings = []
+        article_ids = []
+    
+        for article in articles:
+        # In production, use a proper embedding model like Sentence-BERT
+        # For now, creating random embeddings
+            embedding = np.random.randn(384).astype('float32')
+            embeddings.append(embedding)
+            article_ids.append(int(article['_id']))
+    
+        embeddings = np.array(embeddings).astype('float32')
+    
+         # Create FAISS index
+        index = faiss.IndexFlatL2(embeddings.shape[1])
+    
+        # Wrap in IDMap first (before adding vectors)
+        id_map = faiss.IndexIDMap(index)
+    
+        # Now add embeddings with their IDs
+        id_map.add_with_ids(embeddings, np.array(article_ids))
+    
+        return id_map, article_ids
